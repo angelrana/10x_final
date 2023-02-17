@@ -44,7 +44,7 @@ const videoRoutes = require("./Routes/video");
 const lastWatchedRoutes = require("./Routes/lastWatched");
 const mobileRoutes = require('./Routes/mobileAuth');
 const home = require('./Routes/home');
-const dashboard = require('./Routes/dashboard');
+// const dashboard = require('./Routes/dashboard');
 const testimonials = require('./Routes/testimonials')
 
 

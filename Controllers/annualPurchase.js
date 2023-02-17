@@ -10,7 +10,7 @@ var crypto = require("crypto");
 // 1. create order
 const checkout = async (req, res) => {
     const options = {
-        amount: 2800,  // amount in the smallest currency unit
+        amount: 1500000,  // amount in the smallest currency unit
         currency: "INR",
     };
 
@@ -19,7 +19,7 @@ const checkout = async (req, res) => {
 
         return res.json({
             success: true,
-            message: "Order created successfully",
+            message: "Annual Order created successfully",
             body: order,
         });
     } catch (error) {
@@ -57,15 +57,15 @@ const getkey = async (req, res) => {
     req.status(200).json({ key: process.env.RAZORPAY_API_KEY });
 }
 
-// 4. & days trial timer
+// 4. 7 days trial timer
 const trialTimer = async (req, res) => {
-    const { paymentSuccessful, sClass, razorpay_order_id, razorpay_payment_id } = req.body;
+    const paymentSuccessful = req.body;
 
     if (paymentSuccessful) {
 
         var trialEnded = false;
 
-        let deadline = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        let deadline = new Date(Date.now() + 366 * 24 * 60 * 60 * 1000);
         let interval = setInterval(function () {
             let now = new Date();
             let diff = deadline - now;
@@ -87,6 +87,7 @@ const trialTimer = async (req, res) => {
             mins: mins,
             secs: secs,
             trialEnded: trialEnded,
+            deadline: deadline,
         }
 
         return res.json({
@@ -102,7 +103,6 @@ const trialTimer = async (req, res) => {
         })
     }
 }
-
 
 
 module.exports = {
